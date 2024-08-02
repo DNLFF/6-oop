@@ -136,7 +136,7 @@ class Library {
     }
 }
 
-
+/*
 const library = new Library("Библиотека имени Ленина");
 
 library.addBook(new DetectiveBook("Артур Конан Дойл", "Полное собрание повестей и рассказов о Шерлоке Холмсе в одном томе", 2019, 1008));
@@ -163,6 +163,114 @@ console.log(bookCarTime.state);
 library.addBook(bookCarTime);
 console.log(library.books);
 
-
+*/
 //bookCarTime.repairState = 20;
 //console.log(bookCarTime.repairState);
+
+
+
+class StudentLog {
+    constructor (name){
+        this.name = name;
+        this.subjects = {}
+    }
+
+    getName(){
+        return this.name;
+    }
+
+    addGrade(grade, subject){
+
+        if (!this.subjects[subject]){
+            this.subjects[subject] = [];
+        }
+
+        if ( (typeof(grade)!='number') || grade<1 || grade>5){
+            console.log(`Вы пытались поставить оценку ${grade} по предмету ${subject}. Допускаются только числа от 1 до 5.`);
+        }
+        else{
+        this.subjects[subject].push(grade);
+        }
+
+        return this.subjects[subject].length;
+    }
+
+    getAverageBySubject(subject){
+        if (!this.subjects[subject]){
+            return 0;
+        }
+        let sumGrade = 0;
+
+        for(let i in this.subjects[subject]){
+            sumGrade += this.subjects[subject][i];
+        }
+        let averageBySubject = sumGrade / this.subjects[subject].length;
+    
+        return averageBySubject;
+    }
+
+    getTotalAverage(){
+        let arrAverage = [];
+        let nameSubjects = Object.keys(this.subjects);
+        
+
+        for (let name in nameSubjects){
+        arrAverage.push(this.getAverageBySubject(nameSubjects[name]));
+        
+        }
+
+        let totalAverageSum = 0;
+        for (let i in arrAverage){
+            totalAverageSum += arrAverage[i];
+        }
+
+
+        let totalAverage = totalAverageSum / arrAverage.length;
+        return totalAverage;
+    }
+}
+/*
+const log = new StudentLog('Олег Никифоров');
+
+console.log(log.addGrade(3, 'algebra'));
+// 1
+
+console.log(log.addGrade('отлично!', 'math'));
+// Вы пытались поставить оценку "отлично!" по предмету "math". Допускаются только числа от 1 до 5.
+// 0
+
+console.log(log.addGrade(4, 'algebra'));
+// 2
+
+console.log(log.addGrade(5, 'geometry'));
+// 1
+
+console.log(log.addGrade(25, 'geometry'));
+// Вы пытались поставить оценку "25" по предмету "geometry". Допускаются только числа от 1 до 5.
+// 1
+
+const log = new StudentLog('Олег Никифоров');
+
+log.addGrade(2, 'algebra');
+log.addGrade(4, 'algebra');
+log.addGrade(5, 'geometry');
+log.addGrade(4, 'geometry');
+
+
+console.log(log.getAverageBySubject('geometry')); // 4.5
+console.log(log.getAverageBySubject('algebra')); // 3
+console.log(log.getAverageBySubject('math')); // 0
+*/
+
+
+/*
+
+const log = new StudentLog('Олег Никифоров');
+
+log.addGrade(2, 'algebra');
+log.addGrade(4, 'algebra');
+log.addGrade(5, 'geometry');
+log.addGrade(4, 'geometry');
+
+console.log(log.getTotalAverage()); // 3,75
+*/
